@@ -1,11 +1,11 @@
 # AzureBootCampAppInsights
 This repository contains the slides and the demo materials for the session presented at azure bootcamp colombo 2018
 
-# ASP.NET Core with Application Insights
+# Demo 1 - ASP.NET Core with Application Insights
 ## Add Azure Application Insights to your ASP.NET Core webapplication
 
 
-In this lab, you will learn how to:
+In this demo, you will learn how to:
 
   * [Create a default ASP.NET Core webapplication](#create-an-ASPNET-core-webapp)
   * [Publish the webapplication to Azure](#publish-to-azure)
