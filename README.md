@@ -152,11 +152,68 @@ If you want more than just some request and response times you can add some trac
 And that's all there is to it.
 
 
-## Summary
-By completing this lab you have learned how to create and publish a basic Azure ASP.NET Core application. 
-You've also learning how to setup Application Insights for your application and finally you wrote your own trace line to the cloud!
+# Demo 2 & 3 - Data Analysis with Jupyter Notebook and integration with AppInsights
+## Lets dive into jupyter notebook with some basic data analysis
 
-For more information about Application Insights, please check out [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview)
+1.	Navigate in your browser to https://notebooks.azure.com/
+
+2.  Sign in with your microsoft account
+
+3.  Navigate to Libraries -> New -> Import the csv file - matches.csv
+
+4.  Click new -> Python 2.7 Notebook -> open in new tab
+
+5.  Configure the notebook with necessary imports and visualization
+	```Python
+	import numpy as np # numerical computing 
+	import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+	import matplotlib.pyplot as plt #visualization
+	import seaborn as sns #modern visualization
+	%matplotlib inline
+	sns.set_style("darkgrid")
+	plt.rcParams['figure.figsize'] = (14, 8)
+	``` 
+6. Run the following commands to do the basic analysis on the dataset.
+   ```Python 
+    matches = pd.read_csv('matches.csv')
+    matches.shape
+    matches.head()
+	matches.describe()
+	matches.info()
+	matches['season'].unique()
+	``` 
+7. Lets create some visualizations
+   The most successful IPL Team
+    ```Python 
+	data = matches.winner.value_counts()
+	sns.barplot(y = data.index, x = data, orient='h');
+
+	Winning by runs
+	 ```Python 
+	#sns.barplot(x="day", y="total_bill", data=tips)
+	fig, ax = plt.subplots()
+	#fig.figsize = [16,10]
+	#ax.set_ylim([0,20])
+	ax.set_title("Winning by Runs - Team Performance")
+	#top_players.plot.bar()
+	sns.boxplot(y = 'winner', x = 'win_by_runs', data=matches[matches['win_by_runs']>0], orient = 'h'); #palette="Blues");
+	plt.show()
+
+8. Lets integrate appinsights with Jupyter notebook. Create a new notebook and Import the following helper class inside the notebook.
+	
+9. Create a client to get data from appinsights and create a graph from the response
+	```Python 
+	jupyterObj = Jupyter('DEMO_APP', 'DEMO_KEY')
+	result = jupyterObj.getAIData("requests | where timestamp > ago(1d) | summarize count() by bin(timestamp, 1h)")
+	#axes = jupyterObj.sortAxes(result["Rows"], itemgetter(0), 0, 1)
+	result = jupyterObj.getAIMetricData(metric="requests/count", \
+			startTime=(datetime.now() - timedelta(minutes=15)).isoformat(), \
+			endTime=datetime.now().isoformat(), \
+			interval="PT5M",\
+			aggregation="sum")
+	```
+
+
 
 <!--Image references-->
 [1]: media/001_aspnet_core.png
