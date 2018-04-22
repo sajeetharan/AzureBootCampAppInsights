@@ -212,6 +212,9 @@ And that's all there is to it.
 			interval="PT5M",\
 			aggregation="sum")
 	```
+10. If you are stuck at any place, go to the notebook which is hosted public , you will be able to find the working demo here,
+
+    https://notebooks.azure.com/anon-p5haka/libraries/analysis
 
 
 
