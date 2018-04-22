@@ -147,10 +147,9 @@ If you want more than just some request and response times you can add some trac
    
 	![019 That's a warning][19]
 
-
-
 And that's all there is to it.
 
+Also look at the Solution named Final to have an understanding of adding Custom Telemetry to identify the Correlation and dependency mappings using AppInsights.
 
 # Demo 2 & 3 - Data Analysis with Jupyter Notebook and integration with AppInsights
 ## Lets dive into jupyter notebook with some basic data analysis
