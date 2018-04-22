@@ -216,7 +216,7 @@ And that's all there is to it.
 
     https://notebooks.azure.com/anon-p5haka/libraries/analysis
 
-
+open the Notebook named AzureBootcampDemo.ipynb
 
 <!--Image references-->
 [1]: media/001_aspnet_core.png
